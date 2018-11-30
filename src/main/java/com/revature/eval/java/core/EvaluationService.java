@@ -2,9 +2,9 @@ package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class EvaluationService {
 
@@ -272,7 +272,7 @@ public class EvaluationService {
 		phoneScrub.removeAll(sanitScrub);
 //		System.out.println(phoneScrub);
 		boolean illegal = phoneScrub.contains(throwError);
-		if(illegal) {
+		if(!illegal) {
 			System.out.println("this is legal");
 		}else {System.out.println("this is legal");}
 		
@@ -291,6 +291,24 @@ public class EvaluationService {
 	 */
 	public Map<String, Integer> wordCount(String string) {
 		// TODO Write an implementation for this method declaration
+		String [] wordArr = string.split(" ");
+		TreeMap<String,Integer> freqMap = new TreeMap<String,Integer>();
+		for (int i =0; i<wordArr.length;i++) {
+			Integer c = freqMap.get(wordArr[i]); 
+
+			if (freqMap.get(wordArr[i]) == null) 
+			freqMap.put(wordArr[i], 1); 
+
+
+			else
+			freqMap.put(wordArr[i], ++c); 
+			
+		}
+		
+		for (Map.Entry m:freqMap.entrySet()) 
+			System.out.println("Frequency of " + m.getKey() + 
+								" is " + m.getValue()); 
+		
 		return null;
 	}
 
