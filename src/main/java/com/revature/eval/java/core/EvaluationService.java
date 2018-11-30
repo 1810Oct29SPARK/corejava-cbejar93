@@ -1,6 +1,7 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +32,29 @@ public class EvaluationService {
 	 */
 	public String acronym(String phrase) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		String [] stringArray = phrase.split("[-\\s]");
+		String[] acroArray = new String[stringArray.length];
+
+		for (int i =0; i<= stringArray.length-1;i++) {
+			char [] charArray = stringArray[i].toCharArray();
+//			System.out.println(i);
+			char firstChar = charArray[0];
+			String firstLetter = String.valueOf(firstChar);
+			acroArray[i]=firstLetter;
+		
+		}
+		
+		String str = String.join(",", acroArray);
+
+//		String acro = Arrays.toString(acroArray);
+//		System.out.println("hello");
+		String upperCaseAcro = str.toUpperCase();
+		System.out.println(upperCaseAcro);
+
+
+
+		
+		return upperCaseAcro;
 	}
 
 	/**
@@ -85,17 +108,29 @@ public class EvaluationService {
 
 		public boolean isEquilateral() {
 			// TODO Write an implementation for this method declaration
-			return false;
+			if (this.sideOne==this.sideTwo&& this.sideOne==this.sideThree) {
+				return true;
+			}else {			return false;
+}
 		}
 
 		public boolean isIsosceles() {
 			// TODO Write an implementation for this method declaration
+			if (this.sideOne==this.sideTwo||this.sideOne==this.sideThree||this.sideTwo==this.sideThree) {
+				return true;
+			}
 			return false;
 		}
 
 		public boolean isScalene() {
 			// TODO Write an implementation for this method declaration
-			return false;
+			if(this.isEquilateral()) {
+				return false;
+			}
+			if(this.isIsosceles()){
+				return false;
+			}else {return false;}
+			
 		}
 
 	}
@@ -117,7 +152,69 @@ public class EvaluationService {
 	 */
 	public int getScrabbleScore(String string) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		String lowerCase = string.toLowerCase();
+		int score = 0;
+		String [] plays = lowerCase.split("");
+//		System.out.println("this is scrabble play bro");
+		for (String play:plays) {
+
+			switch(play) {
+			case "a": 
+			case "e":
+			case "i":
+			case "o":
+			case "u":
+			case "l":
+			case "n":
+			case "r":
+			case "s":
+			case "t":
+					score+=1;
+//					System.out.println(score);
+					break;
+			case "d":
+			case "g":
+					score+=2;
+//					System.out.println(score);
+
+					break;
+			case "b":
+			case "c":
+			case "m":
+			case "p":
+					score+=3;
+//					System.out.println(score);
+
+					break;
+			case "f":
+			case "h":
+			case "v":
+			case "w":
+			case "y":
+					score+=4;
+//					System.out.println(score);
+
+					break;
+			case "k":
+					score+=5;
+					break;
+			case "j":
+			case "x":
+					score+=8;
+//					System.out.println(score);
+
+					break;
+			case "q":
+			case "z":
+					score+=10;
+//					System.out.println(score);
+
+					break;
+				
+			}
+		}
+		
+		return score;
 	}
 
 	/**
