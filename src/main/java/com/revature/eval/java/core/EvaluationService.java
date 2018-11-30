@@ -1,6 +1,7 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -250,6 +251,32 @@ public class EvaluationService {
 	 */
 	public String cleanPhoneNumber(String string) {
 		// TODO Write an implementation for this method declaration
+		String[] eles = string.split("");
+		String[] elesRemove = {"(",")","-","."," "};
+		String[] elesWrong = {"@",":","!","a","b","c"};
+
+		ArrayList<String> sanitScrub = new ArrayList<String>();
+		for (String eleRemove:elesRemove ) {
+			sanitScrub.add(eleRemove);
+		}
+		
+		ArrayList<String> throwError = new ArrayList<String>();
+		for (String eleWrong:elesWrong ) {
+			sanitScrub.add(eleWrong);
+		}
+		
+		ArrayList<String> phoneScrub = new ArrayList<String>();
+		for (String ele:eles ) {
+			phoneScrub.add(ele);
+		}
+		phoneScrub.removeAll(sanitScrub);
+//		System.out.println(phoneScrub);
+		boolean illegal = phoneScrub.contains(throwError);
+		if(illegal) {
+			System.out.println("this is legal");
+		}else {System.out.println("this is legal");}
+		
+
 		return null;
 	}
 
