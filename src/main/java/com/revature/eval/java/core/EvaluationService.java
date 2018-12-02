@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.IntStream;
 
 public class EvaluationService {
 
@@ -698,7 +699,25 @@ public class EvaluationService {
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+//		System.out.println("hello");
+//		System.out.println(set.length);
+		int sum = 0;
+        for (int j = i - 1; j >= 1; j--) {
+            for (int t = 0; t < set.length; t++) {
+                int more = 0;
+                if (j % set[t] == 0) {
+                    sum += j;
+                    more++;
+                }
+                if (more == 1) {
+                    break;
+                }
+            }
+        }
+        System.out.println(sum);
+        return sum;
+		
+
 	}
 
 	/**
