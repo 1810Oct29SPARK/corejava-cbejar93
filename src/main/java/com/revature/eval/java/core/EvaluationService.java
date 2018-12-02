@@ -2,6 +2,8 @@ package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -45,16 +47,14 @@ public class EvaluationService {
 		
 		}
 		
-		String str = String.join(",", acroArray);
+		String str = String.join("", acroArray);
 
 //		String acro = Arrays.toString(acroArray);
-//		System.out.println("hello");
+//		System.out.println(str);
+		
 		String upperCaseAcro = str.toUpperCase();
 		System.out.println(upperCaseAcro);
 
-
-
-		
 		return upperCaseAcro;
 	}
 
@@ -251,33 +251,53 @@ public class EvaluationService {
 	 */
 	public String cleanPhoneNumber(String string) {
 		// TODO Write an implementation for this method declaration
+		String[] elesWrong = {"@",":","!","a","b","c"};
+		for (int i =0; i <elesWrong.length-1;i++) {
+			if (string.contains(elesWrong[i])) {
+				throw new IllegalArgumentException("ILLEGAL ILLEGAL ILLEGAL!!!!");
+			}
+		}
+//		System.out.println(illegalStuff);
+//		System.out.println(string);
+		
+
 		String[] eles = string.split("");
 		String[] elesRemove = {"(",")","-","."," "};
-		String[] elesWrong = {"@",":","!","a","b","c"};
 
 		ArrayList<String> sanitScrub = new ArrayList<String>();
 		for (String eleRemove:elesRemove ) {
 			sanitScrub.add(eleRemove);
 		}
-		
-		ArrayList<String> throwError = new ArrayList<String>();
-		for (String eleWrong:elesWrong ) {
-			sanitScrub.add(eleWrong);
-		}
-		
+			
 		ArrayList<String> phoneScrub = new ArrayList<String>();
 		for (String ele:eles ) {
 			phoneScrub.add(ele);
 		}
 		phoneScrub.removeAll(sanitScrub);
+
 //		System.out.println(phoneScrub);
-		boolean illegal = phoneScrub.contains(throwError);
-		if(!illegal) {
-			System.out.println("this is legal");
-		}else {System.out.println("this is legal");}
+		if (phoneScrub.size()>=11) {
+			throw new IllegalArgumentException("too many digets!!");
+		}
+		
+		StringBuilder phoneString = new StringBuilder();
+
+//		String phoneString = "";
+		for ( String number: phoneScrub) {
+//			phoneString.append(String.valueOf(number)); 
+		    phoneString.append(number);
+//		    phoneString.append("\t");
+
+		}
+		
+//		System.out.println(phoneString.toString());
+		String finalNum = phoneString.toString();
+//		if(!illegalStuff) {
+//			System.out.println("this is legal");
+//		}else {System.out.println("this is NOT legal");}
 		
 
-		return null;
+		return finalNum;
 	}
 
 	/**
@@ -305,11 +325,16 @@ public class EvaluationService {
 			
 		}
 		
-		for (Map.Entry m:freqMap.entrySet()) 
-			System.out.println("Frequency of " + m.getKey() + 
-								" is " + m.getValue()); 
+		for (Map.Entry m:freqMap.entrySet()) { 
+			Object key= m.getKey();
+		Object value  =m.getValue(); 
+//		System.out.println(m.getKey());
+//		System.out.println(m.getValue());
+//		return m.getKey()
+		}
+//		System.out.println(freqMap);
 		
-		return null;
+		return freqMap;
 	}
 
 	/**
@@ -352,6 +377,17 @@ public class EvaluationService {
 
 		public int indexOf(T t) {
 			// TODO Write an implementation for this method declaration
+//			  System.out.println(this.getSortedList());
+			  List<T> list = this.getSortedList();
+			  System.out.println(list);
+			  System.out.println(t);
+			  int i = (Integer) t;
+			  System.out.println(i);
+			  int primero = 0;
+			  int ultimo = list.size();
+			  int mitad = (primero-ultimo)/2;
+//			  int index = Collections.binarySearch(list, t);
+			  
 			return 0;
 		}
 
