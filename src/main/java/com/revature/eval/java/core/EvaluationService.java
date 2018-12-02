@@ -53,7 +53,7 @@ public class EvaluationService {
 //		System.out.println(str);
 		
 		String upperCaseAcro = str.toUpperCase();
-		System.out.println(upperCaseAcro);
+//		System.out.println(upperCaseAcro);
 
 		return upperCaseAcro;
 	}
@@ -460,7 +460,7 @@ public class EvaluationService {
 		int number = input, originalNumber, remainder, result =0,n =0;
 		originalNumber = number;
 		
-		System.out.println(number);
+//		System.out.println(number);
 		for (;originalNumber != 0; originalNumber /= 10, ++n);
 
         originalNumber = number;
@@ -657,7 +657,17 @@ public class EvaluationService {
 	 */
 	public boolean isPangram(String string) {
 		// TODO Write an implementation for this method declaration
-		return false;
+		if (string.length() < 26) {
+			return false;
+		}
+		
+		String lowerString = string.toLowerCase();
+		for (char i = 'a'; i< 'z';i++) {
+			if (!(lowerString.contains(i+""))) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
@@ -761,7 +771,71 @@ public class EvaluationService {
 	 */
 	public int solveWordProblem(String string) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		boolean oneisNegative = false;
+		boolean twoisNegative = false;
+		Double num1 =0.0;
+		Double num2=0.0;
+		String newString = string.replaceAll("\\s*\\p{Punct}+\\s*$", "");
+		String noBy = newString.replaceAll("by", "");
+//		System.out.println(noBy);
+//		System.out.println(newString);
+		String [] arrayString = noBy.split(" ");
+//		System.out.println(arrayString);
+//		for (String ele: arrayString) {
+//			System.out.println(ele);
+//		}
+		String firstNum = arrayString[2];
+		String operator = arrayString[3];
+		String secondNum = arrayString[4];
+		if (arrayString.length == 6) {
+			secondNum = arrayString[5];
+		}
+		
+//		System.out.println(secondNum);
+		double result = 0;
+//		System.out.println(firstNum);
+		if (firstNum.contains("-")) {
+//			System.out.println(firstNum + "is a negative");
+			oneisNegative =true;
+		}
+//		
+		if (secondNum.contains("-")) {
+//			System.out.println(secondNum + "is a negative");
+			twoisNegative = true;
+		}
+		String one = firstNum.replaceAll("-", "");
+		String two = secondNum.replaceAll("-", "");
+		num1 = Double.parseDouble(one);
+		num2 = Double.parseDouble(two);
+//		System.out.println(num2);
+		if (oneisNegative) {
+			num1 = -num1;
+//			System.out.println(num1);
+		}
+		if (twoisNegative) {
+			num2 = -num2;
+//			System.out.println(num2);
+		}
+		
+		switch(operator){
+		case "plus":
+			result =num1+num2;
+			break;
+		case "minus":
+			result =num1-num2;
+			break;
+		case "divided":
+			result=num1/num2;
+			break;
+		case "multiplied":
+			result=num1*num2;
+			break;
+		}
+		int value = (int) result;
+
+		
+		
+		return value;
 	}
 
 }
