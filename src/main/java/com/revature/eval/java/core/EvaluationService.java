@@ -2,8 +2,8 @@ package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -379,16 +379,27 @@ public class EvaluationService {
 			// TODO Write an implementation for this method declaration
 //			  System.out.println(this.getSortedList());
 			  List<T> list = this.getSortedList();
-			  System.out.println(list);
-			  System.out.println(t);
-			  int i = (Integer) t;
-			  System.out.println(i);
-			  int primero = 0;
-			  int ultimo = list.size();
-			  int mitad = (primero-ultimo)/2;
-//			  int index = Collections.binarySearch(list, t);
 			  
-			return 0;
+//			  System.out.println(list);
+//			  System.out.println(t);
+//			  int i = (Integer) t;
+//			  int [] i = (int[]) list;
+//			  Collections.sort((List<T>) list);
+			   ArrayList<T> arraylist=new ArrayList<T>(list);
+//			   System.out.println(arraylist);
+//			   int keyValue = arraylist.size()/2;
+			   int index = Collections.binarySearch(arraylist, t,null);
+//			   System.out.println("search for "+ t);
+//			   System.out.println("this is what we found in the index "+index);
+//			  System.out.println(i);
+//			  int primero = 0;
+//			  int ultimo = list.size();
+//			  int mitad = (primero-ultimo)/2;
+//			  int[] array = list.stream().mapToInt(i->i).toArray();
+
+//			  int [] index = list[numberSearched];
+			  
+			return index;
 		}
 
 		public BinarySearch(List<T> sortedList) {
@@ -445,7 +456,27 @@ public class EvaluationService {
 	 */
 	public boolean isArmstrongNumber(int input) {
 		// TODO Write an implementation for this method declaration
-		return false;
+		boolean armNumber= false;
+		int number = input, originalNumber, remainder, result =0,n =0;
+		originalNumber = number;
+		
+		System.out.println(number);
+		for (;originalNumber != 0; originalNumber /= 10, ++n);
+
+        originalNumber = number;
+
+        for (;originalNumber != 0; originalNumber /= 10)
+        {
+            remainder = originalNumber % 10;
+            result += Math.pow(remainder, n);
+        }
+
+        if(result == number) {
+        	armNumber=true;
+        }
+//        else
+//            System.out.println(number + " is not an Armstrong number.");
+		return armNumber;
 	}
 
 	/**
@@ -460,7 +491,21 @@ public class EvaluationService {
 	 */
 	public List<Long> calculatePrimeFactorsOf(long l) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		List<Long> list = new ArrayList<Long>();
+        if (l == 2) {
+            list.add(l);
+            return list;
+        }
+        for (long i = 2; i <= l; i++) {
+            if (l % i == 0) {
+                l = l / i;
+                list.add(i);
+                i = 1;
+
+            }
+        }
+        return list;
+//		return null;
 	}
 
 	/**
