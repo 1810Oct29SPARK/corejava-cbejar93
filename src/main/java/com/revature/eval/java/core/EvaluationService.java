@@ -3,11 +3,9 @@ package com.revature.eval.java.core;
 import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.stream.IntStream;
 
 public class EvaluationService {
 
@@ -601,7 +599,40 @@ public class EvaluationService {
 		 */
 		public static String encode(String string) {
 			// TODO Write an implementation for this method declaration
-			return null;
+			String abc = "abcdefghijklmnopqrstuvwxyz";
+			String cba = "zyxwvutsrqponmlkjihgfedcba";
+			int count = 0;
+			String newString = string.toLowerCase();
+			String cleanString =newString.replaceAll("[ ,.]", "");
+			System.out.println(cleanString);
+			String cipher = "";
+		    StringBuilder finalCipher = new StringBuilder();
+
+			for (int i = 0; i<cleanString.length();i++) {
+				if(Character.isDigit(cleanString.charAt(i))) {
+					cipher+=Character.getNumericValue(cleanString.charAt(i));
+				}
+				else {
+				int indexOf = abc.indexOf(cleanString.charAt(i));
+				cipher += cba.charAt(indexOf);
+				}
+				
+			}
+			finalCipher.append(cipher);
+			
+			for (int i =0; i <finalCipher.length();i++) {
+//				System.out.println("hello");
+				count++;
+//				System.out.println(count);
+				if (count ==6) {
+					finalCipher.insert(i, ' ');
+					count = 0;
+				}
+			}
+			System.out.println(finalCipher);
+			String answer = finalCipher.toString();
+			
+			return answer;
 		}
 
 		/**
@@ -612,7 +643,22 @@ public class EvaluationService {
 		 */
 		public static String decode(String string) {
 			// TODO Write an implementation for this method declaration
-			return null;
+			String abc = "abcdefghijklmnopqrstuvwxyz";
+			String cba = "zyxwvutsrqponmlkjihgfedcba";
+			String result = "";
+			string =string.replaceAll(" ", "");
+			for (int i = 0; i<string.length();i++) {
+				if(Character.isDigit(string.charAt(i))) {
+					result+=Character.getNumericValue(string.charAt(i));
+				}
+				else {
+				int indexOf = cba.indexOf(string.charAt(i));
+				result += abc.charAt(indexOf);
+				}
+				
+			}
+			
+			return result;
 		}
 	}
 
